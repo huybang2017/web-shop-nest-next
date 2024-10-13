@@ -54,14 +54,20 @@ This is a full-stack web shop application built with [NestJS](https://nestjs.com
 cp backend/.env.example backend/.env
 ```
 
-4. Run project in backend:
+4. Configure dotenv:
+
+```bash
+cd backend && cp .env.example .env
+```
+
+5. Run project in backend:
 
 ```bash
 pnpm run start:dev
 ```
 
-5. Run project in frontend:
+6. Run project in frontend:
 
 ```bash
-  pnpm run dev
+pnpm run dev
 ```
