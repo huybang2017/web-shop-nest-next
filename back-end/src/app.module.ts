@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfigAsync } from './config/config.database';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { RoleModule } from './role/role.module';
+import { RoleModule } from './roles/roles.module';
 import { ProductsModule } from './products/products.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SuppliersModule } from './suppliers/suppliers.module';
     RoleModule,
     ProductsModule,
     SuppliersModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
