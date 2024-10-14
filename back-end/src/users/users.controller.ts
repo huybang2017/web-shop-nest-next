@@ -5,23 +5,22 @@ import {
   Get,
   NotFoundException,
   Param,
-  Patch,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entity/users.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiTags, ApiResponse } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('Users')
 @Controller('apis/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Post()
   @ApiResponse({
@@ -51,7 +50,9 @@ export class UsersController {
     return user;
   }
 
-  @Patch(':id')
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @Put(':id')
   @ApiResponse({
     status: 200,
     description: 'User updated successfully',
@@ -69,6 +70,8 @@ export class UsersController {
     return user;
   }
 
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Delete(':id')
   @ApiResponse({ status: 204, description: 'User removed successfully' })
   @ApiResponse({ status: 404, description: 'User not found' })
