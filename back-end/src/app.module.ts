@@ -7,6 +7,8 @@ import { typeOrmConfigAsync } from './config/config.database';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RoleModule } from './role/role.module';
+import { ProductsModule } from './products/products.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { RoleModule } from './role/role.module';
     AuthModule,
     UsersModule,
     RoleModule,
+    ProductsModule,
+    SuppliersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
