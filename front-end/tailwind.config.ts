@@ -10,9 +10,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      screens: {
+        sx: "450px",
+        sm: "650px",
+        md: "878px",
+        lg: "1070px",
+        xl: "1200px",
       },
     },
   },
