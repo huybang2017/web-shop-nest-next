@@ -8,11 +8,11 @@ export class ShippingMethod {
   id: number;
 
   @ApiProperty()
-  @Column()
+  @Column({ type: 'varchar', length: 100 })
   name: string;
 
   @ApiProperty()
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
   @OneToMany(() => ShopOrder, (order) => order.shippingMethod)

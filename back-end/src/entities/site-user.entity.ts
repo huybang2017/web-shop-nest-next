@@ -44,4 +44,7 @@ export class User {
 
   @OneToMany(() => UserReview, (user) => user.user)
   reviews: UserReview[];
+
+  @OneToMany(() => ShopOrder, (order) => order.user)
+  orders: ShopOrder[];
 }

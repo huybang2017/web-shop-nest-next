@@ -12,6 +12,7 @@ import { OrderLine } from './order-line.entity';
 import { OrderStatus } from './order-status.entity';
 import { ShippingMethod } from './shipping-method.entity';
 import { UserPaymentMethod } from './user-payment-method.entity';
+import { User } from './site-user.entity';
 
 @Entity('shop_order')
 export class ShopOrder {
@@ -27,15 +28,15 @@ export class ShopOrder {
   orderLines: OrderLine[];
 
   @ApiProperty()
-  @Column({ type: 'decimal' })
-  total_price: number;
+  @Column()
+  order_total: number;
 
   @ApiProperty()
   @Column({ type: 'timestamp' })
   order_date: Date;
 
   @ManyToOne(() => OrderStatus, (status) => status.orders)
-  @JoinColumn({ name: 'status_id' })
+  @JoinColumn({ name: 'order_status_id' })
   status: OrderStatus;
 
   @ManyToOne(() => ShippingMethod, (shippingMethod) => shippingMethod.orders)
@@ -45,4 +46,8 @@ export class ShopOrder {
   @ManyToOne(() => UserPaymentMethod, (user) => user.orders)
   @JoinColumn({ name: 'payment_method_id' })
   paymentMethod: UserPaymentMethod;
+
+  @ManyToOne(() => User, (user) => user.orders)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }
