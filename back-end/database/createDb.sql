@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS promotion (
   name VARCHAR(100) NOT NULL,
   description TEXT NOT NULL,
   discount DECIMAL(10, 2) NOT NULL,
-  start_date DATE NOT NULL,
-  end_date DATE NOT NULL
+  start_date TIMESTAMP NOT NULL,
+  end_date TIMESTAMP NOT NULL
 );
 
 -- Bảng category (thiếu trong câu lệnh ban đầu)
@@ -77,12 +77,13 @@ CREATE TABLE IF NOT EXISTS site_user (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
+  role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
   phone_number VARCHAR(100) NOT NULL
 );
 
 -- Bảng country
 CREATE TABLE IF NOT EXISTS country (
-  id VARCHAR(100) PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   country_name VARCHAR(100) NOT NULL
 );
 
@@ -96,7 +97,7 @@ CREATE TABLE IF NOT EXISTS address (
   city VARCHAR(100) NOT NULL,
   region VARCHAR(100) NOT NULL,
   postal_code VARCHAR(100) NOT NULL,
-  country_id VARCHAR(100) NOT NULL,
+  country_id INT NOT NULL,
   FOREIGN KEY (country_id) REFERENCES country(id)
 );
 
@@ -159,7 +160,7 @@ CREATE TABLE IF NOT EXISTS user_payment_method (
   payment_type_id INT NOT NULL,
   provider VARCHAR(100) NOT NULL,
   account_number VARCHAR(100) NOT NULL,
-  expiry_date DATE NOT NULL,
+  expiry_date TIMESTAMP NOT NULL,
   is_default BOOLEAN NOT NULL,
   FOREIGN KEY (user_id) REFERENCES site_user(id),
   FOREIGN KEY (payment_type_id) REFERENCES payment_type(id)
@@ -169,7 +170,7 @@ CREATE TABLE IF NOT EXISTS user_payment_method (
 CREATE TABLE IF NOT EXISTS shop_order (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  order_date DATE NOT NULL,
+  order_date TIMESTAMP NOT NULL,
   payment_method_id INT NOT NULL,
   shipping_address_id INT NOT NULL,
   shipping_method_id INT NOT NULL,

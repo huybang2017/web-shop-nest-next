@@ -1,8 +1,8 @@
 use web_shop;
 -- Bảng country (Không có phụ thuộc)
-INSERT INTO country (id, country_name)
+INSERT INTO country (country_name)
 VALUES
-('US', 'United States'), ('CA', 'Canada'), ('UK', 'United Kingdom'), ('FR', 'France'), ('DE', 'Germany');
+('United States'), ('Canada'), ('United Kingdom'), ('France'), ('Germany');
 
 -- Bảng category (Không có phụ thuộc)
 INSERT INTO category (id, name)
@@ -20,13 +20,14 @@ VALUES
 (1), (2), (3), (4), (5);
 
 -- Bảng site_user (Không có phụ thuộc)
-INSERT INTO site_user (email, password, phone_number)
+INSERT INTO site_user (email, password, role, phone_number)
 VALUES
-('user1@example.com', 'password123', '123456789'),
-('user2@example.com', 'password456', '987654321'),
-('user3@example.com', 'password789', '555555555'),
-('user4@example.com', 'password101', '111222333'),
-('user5@example.com', 'password111', '999888777');
+('admin@example.com', 'admin','admin', '123456789'),
+('user1@example.com', 'password123','user', '123456789'),
+('user2@example.com', 'password456','user', '987654321'),
+('user3@example.com', 'password789','user', '555555555'),
+('user4@example.com', 'password101','user', '111222333'),
+('user5@example.com', 'password111','user', '999888777');
 
 -- Bảng shipping_method (Không có phụ thuộc)
 INSERT INTO shipping_method (name, price)
@@ -41,20 +42,20 @@ VALUES
 -- Bảng address (Phụ thuộc vào country)
 INSERT INTO address (unit_number, street_number, address_line1, address_line2, city, region, postal_code, country_id)
 VALUES
-('Unit 1', '10', 'Street A', 'Block B', 'City 1', 'Region 1', '10000', 'US'),
-('Unit 2', '20', 'Street B', 'Block C', 'City 2', 'Region 2', '20000', 'US'),
-('Unit 3', '30', 'Street C', 'Block D', 'City 3', 'Region 3', '30000', 'US'),
-('Unit 4', '40', 'Street D', 'Block E', 'City 4', 'Region 4', '40000', 'US'),
-('Unit 5', '50', 'Street E', 'Block F', 'City 5', 'Region 5', '50000', 'US');
+('Unit 1', '10', 'Street A', 'Block B', 'City 1', 'Region 1', '10000', 1),
+('Unit 2', '20', 'Street B', 'Block C', 'City 2', 'Region 2', '20000', 2),
+('Unit 3', '30', 'Street C', 'Block D', 'City 3', 'Region 3', '30000', 3),
+('Unit 4', '40', 'Street D', 'Block E', 'City 4', 'Region 4', '40000', 2),
+('Unit 5', '50', 'Street E', 'Block F', 'City 5', 'Region 5', '50000', 5);
 
 -- Bảng promotion (Không có phụ thuộc)
 INSERT INTO promotion (name, description, discount, start_date, end_date)
 VALUES
-('Holiday Sale', 'Up to 50% off on selected items', 50.00, '2024-10-01', '2024-10-31'),
-('Summer Discount', 'Discount on summer collections', 30.00, '2024-07-01', '2024-07-31'),
-('Black Friday', 'Black Friday promotion', 70.00, '2024-11-25', '2024-11-30'),
-('New Year Sale', 'New Year special discounts', 40.00, '2025-01-01', '2025-01-07'),
-('Clearance Sale', 'Clearance sale for the end of season', 60.00, '2024-12-01', '2024-12-31');
+('Holiday Sale', 'Up to 50% off on selected items', 50.00, '2024-10-01 00:00:00', '2024-10-31 23:59:59'),
+('Summer Discount', 'Discount on summer collections', 30.00, '2024-07-01 00:00:00', '2024-07-31 23:59:59'),
+('Black Friday', 'Black Friday promotion', 70.00, '2024-11-25 00:00:00', '2024-11-30 23:59:59'),
+('New Year Sale', 'New Year special discounts', 40.00, '2025-01-01 00:00:00', '2025-01-07 23:59:59'),
+('Clearance Sale', 'Clearance sale for the end of season', 60.00, '2024-12-01 00:00:00', '2024-12-31 23:59:59');
 
 -- Bảng product (Phụ thuộc vào category)
 INSERT INTO product (name, description, product_image, category_id)
@@ -116,17 +117,20 @@ VALUES
 -- Bảng shop_order (Phụ thuộc vào site_user, payment_type và address)
 INSERT INTO shop_order (user_id, order_date, payment_method_id, shipping_address_id, shipping_method_id, order_total, order_status_id)
 VALUES
-(1, '2024-10-01', 1, 1, 1, 100.00, 1),  -- Giả sử shipping_method_id = 1
-(2, '2024-10-02', 2, 2, 2, 200.00, 2),  -- Giả sử shipping_method_id = 2
-(3, '2024-10-03', 3, 3, 1, 300.00, 3),  -- Giả sử shipping_method_id = 1
-(4, '2024-10-04', 4, 4, 2, 400.00, 4),  -- Giả sử shipping_method_id = 2
-(5, '2024-10-05', 5, 5, 1, 500.00, 5);  -- Giả sử shipping_method_id = 1
-
+(1, '2024-10-01 00:00:00', 1, 1, 1, 100.00, 1),  -- Giả sử shipping_method_id = 1
+(2, '2024-10-02 00:00:00', 2, 2, 2, 200.00, 2),  -- Giả sử shipping_method_id = 2
+(3, '2024-10-03 00:00:00', 3, 3, 1, 300.00, 3),  -- Giả sử shipping_method_id = 1
+(4, '2024-10-04 00:00:00', 4, 4, 2, 400.00, 4),  -- Giả sử shipping_method_id = 2
+(5, '2024-10-05 00:00:00', 5, 5, 1, 500.00, 5);  -- Giả sử shipping_method_id = 1
 
 -- Bảng order_line (Phụ thuộc vào shop_order và product)
 INSERT INTO order_line (order_id, product_item_id, quantity, price)
 VALUES
-(1, 1, 1, 19.99), (2, 2, 1, 59.99), (3, 3, 1, 199.99), (4, 4, 1, 999.99), (5, 5, 1, 150.99);
+(1, 1, 1, 19.99),
+(2, 2, 2, 59.99),
+(3, 3, 1, 199.99),
+(4, 4, 1, 999.99),
+(5, 5, 1, 150.99);
 
 -- Bảng user_address (Phụ thuộc vào site_user và address)
 INSERT INTO user_address (user_id, address_id, is_default)
@@ -137,7 +141,6 @@ VALUES
 (4, 4, false), -- Địa chỉ thứ tư
 (5, 5, true);  -- Địa chỉ thứ năm
 
-
 -- Bảng review (Phụ thuộc vào product và site_user)
 INSERT INTO user_review (product_id, user_id, comment, rating_value)
 VALUES
@@ -146,4 +149,3 @@ VALUES
 (3, 3, 'Highly recommend!', 5),
 (4, 4, 'Satisfactory', 3),
 (5, 2, 'Not as expected', 2);
-
