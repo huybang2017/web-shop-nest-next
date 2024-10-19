@@ -9,6 +9,8 @@ import {
 
 import { ApiProperty } from '@nestjs/swagger';
 import { Product } from './product.entity';
+import { Variation } from './variation.entity';
+import { PromotionCategory } from './promotion-category.entity';
 
 @Entity('product_category')
 export class ProductCategory {
@@ -26,4 +28,13 @@ export class ProductCategory {
 
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
+
+  @OneToMany(() => Variation, (variation) => variation.category)
+  category: Variation[];
+
+  @OneToMany(
+    () => PromotionCategory,
+    (promotionCategory) => promotionCategory.productCategory,
+  )
+  promotionCategories: PromotionCategory[];
 }

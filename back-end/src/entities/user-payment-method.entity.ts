@@ -4,10 +4,12 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { PaymentType } from './payment-type.entity';
 import { User } from './site-user.entity';
+import { ShopOrder } from './shop-order.entity';
 
 @Entity('user_payment_method')
 export class UserPaymentMethod {
@@ -40,4 +42,7 @@ export class UserPaymentMethod {
   @ApiProperty()
   @Column({ type: 'boolean', default: false })
   is_default: boolean;
+
+  @OneToMany(() => ShopOrder, (order) => order.paymentMethod)
+  orders: ShopOrder[];
 }

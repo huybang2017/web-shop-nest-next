@@ -4,6 +4,7 @@ import { UserAddress } from './user-address.entity';
 import { UserPaymentMethod } from './user-payment-method.entity';
 import { ShoppingCart } from './shopping-cart.entity';
 import { ShopOrder } from './shop-order.entity';
+import { UserReview } from './user-review.entity';
 
 export enum RoleType {
   ADMIN = 'admin',
@@ -41,6 +42,6 @@ export class User {
   @OneToMany(() => ShoppingCart, (cart) => cart.user)
   shoppingCarts: ShoppingCart[];
 
-  @OneToMany(() => ShopOrder, (order) => order.user)
-  orders: ShopOrder[];
+  @OneToMany(() => UserReview, (user) => user.user)
+  reviews: UserReview[];
 }
