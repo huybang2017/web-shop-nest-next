@@ -1,7 +1,7 @@
 import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
-import { AuthService } from './auth.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
-import { SignInDto } from 'src/dto';
+import { SignInDto } from 'src/dtos';
+import { AuthService } from 'src/services/auth.service';
 
 @ApiTags('Auth') // Tag for grouping in Swagger UI
 @Controller('auth/api')
@@ -19,7 +19,7 @@ export class AuthController {
         email: { type: 'string', example: 'admin@example.com' },
         password: { type: 'string', example: 'admin' },
       },
-      required: ['username', 'password'],
+      required: ['email', 'password'],
     },
   })
   @ApiResponse({ status: 200, description: 'Successful login' })

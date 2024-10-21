@@ -5,7 +5,7 @@ import { UserPaymentMethod } from './user-payment-method.entity';
 import { ShoppingCart } from './shopping-cart.entity';
 import { ShopOrder } from './shop-order.entity';
 import { UserReview } from './user-review.entity';
-import { RoleType } from 'src/utlis/type';
+import { RoleType } from 'src/utlis/type/role-type';
 
 @Entity('site_user')
 export class User {

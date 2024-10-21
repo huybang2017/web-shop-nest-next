@@ -10,7 +10,6 @@ import {
   HttpStatus,
   UseGuards,
 } from '@nestjs/common';
-import { UserService } from './user.service';
 import {
   ApiTags,
   ApiOperation,
@@ -19,11 +18,12 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { User } from 'src/entities';
-import { CreateUserDto, UpdateUserDto } from 'src/dto';
+import { CreateUserDto, UpdateUserDto } from 'src/dtos';
 import { AuthGuard } from 'src/utlis/guard/auth.guard';
 import { RolesGuard } from 'src/utlis/guard/role.guard';
 import { Roles } from 'src/utlis/decorate/role.decoator';
-import { RoleType } from 'src/utlis/type';
+import { UserService } from 'src/services/user.service';
+import { RoleType } from 'src/utlis/type/role-type';
 
 @ApiTags('User')
 @UseGuards(AuthGuard, RolesGuard)
