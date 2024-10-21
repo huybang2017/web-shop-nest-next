@@ -5,11 +5,7 @@ import { UserPaymentMethod } from './user-payment-method.entity';
 import { ShoppingCart } from './shopping-cart.entity';
 import { ShopOrder } from './shop-order.entity';
 import { UserReview } from './user-review.entity';
-
-export enum RoleType {
-  ADMIN = 'admin',
-  USER = 'user',
-}
+import { RoleType } from 'src/utlis/type';
 
 @Entity('site_user')
 export class User {
