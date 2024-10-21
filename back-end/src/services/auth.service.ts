@@ -15,8 +15,6 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-    console.log(user.password, pass);
-    console.log(process.env.JWT_SECRET);
     const isMatch = await bcrypt.compare(pass, user.password);
     if (!isMatch) {
       throw new UnauthorizedException();
