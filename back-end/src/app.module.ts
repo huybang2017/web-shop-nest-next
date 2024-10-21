@@ -4,9 +4,14 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfigAsync } from './config/config.database';
-import { ProductModule } from './modules';
-import { UserModule } from './modules/user/user.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { APP_FILTER } from '@nestjs/core';
+import { ConflictExceptionFilter } from './utlis/exception-filter/conflict-exception.filter';
+import { UnauthorizedExceptionFilter } from './utlis/exception-filter/unauthorized-exception.filter';
+import { ForbiddenExceptionFilter } from './utlis/exception-filter/forbidden-exception.filter';
+import { NotFoundExceptionFilter } from './utlis/exception-filter/not-found-exception.filter';
+import { AuthModule } from './modules/auth.module';
+import { UserModule } from './modules/user.module';
+import { ProductModule } from './modules/product.module';
 
 @Module({
   imports: [
@@ -17,6 +22,21 @@ import { AuthModule } from './modules/auth/auth.module';
     ProductModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: ConflictExceptionFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: UnauthorizedExceptionFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: ForbiddenExceptionFilter,
+    },
+    { provide: APP_FILTER, useClass: NotFoundExceptionFilter },
+  ],
 })
 export class AppModule {}
