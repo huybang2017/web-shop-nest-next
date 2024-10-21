@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS promotion (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   description TEXT NOT NULL,
-  discount DECIMAL(10, 2) NOT NULL,
+  discount_rate DECIMAL(10, 2) NOT NULL,
   start_date TIMESTAMP NOT NULL,
   end_date TIMESTAMP NOT NULL
 );
@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS promotion_category (
   promotion_id INT NOT NULL,
   category_id INT NOT NULL,
   FOREIGN KEY (promotion_id) REFERENCES promotion(id),
-  FOREIGN KEY (category_id) REFERENCES category(id)
+  FOREIGN KEY (category_id) REFERENCES category(id),
+  primary key (promotion_id, category_id)
 );
 
 -- Bảng product
@@ -198,11 +199,11 @@ CREATE TABLE IF NOT EXISTS order_line (
 CREATE TABLE IF NOT EXISTS user_review (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  product_id INT NOT NULL,
+  order_product_id INT NOT NULL,
   comment TEXT NOT NULL,
   rating_value INT NOT NULL,
-  FOREIGN KEY (product_id) REFERENCES product(id),
-  FOREIGN KEY (user_id) REFERENCES site_user(id)
+  FOREIGN KEY (user_id) REFERENCES site_user(id),
+  FOREIGN KEY (order_product_id) REFERENCES order_line(id)
 );
 
 

@@ -22,12 +22,13 @@ VALUES
 -- Bảng site_user (Không có phụ thuộc)
 INSERT INTO site_user (email, password, role, phone_number)
 VALUES
-('admin@example.com', 'admin','admin', '123456789'),
-('user1@example.com', 'password123','user', '123456789'),
-('user2@example.com', 'password456','user', '987654321'),
-('user3@example.com', 'password789','user', '555555555'),
-('user4@example.com', 'password101','user', '111222333'),
-('user5@example.com', 'password111','user', '999888777');
+('admin@example.com', '$2a$10$mxng3ASi.mDgzmASxKifaeu36wb1BpSG/mFIk6tEAi22P9xscsizK', 'admin', '123456789'),
+('user1@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '123456789'),
+('user2@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '987654321'),
+('user3@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '555555555'),
+('user4@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '111222333'),
+('user5@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '999888777');
+
 
 -- Bảng shipping_method (Không có phụ thuộc)
 INSERT INTO shipping_method (name, price)
@@ -49,7 +50,7 @@ VALUES
 ('Unit 5', '50', 'Street E', 'Block F', 'City 5', 'Region 5', '50000', 5);
 
 -- Bảng promotion (Không có phụ thuộc)
-INSERT INTO promotion (name, description, discount, start_date, end_date)
+INSERT INTO promotion (name, description, discount_rate, start_date, end_date)
 VALUES
 ('Holiday Sale', 'Up to 50% off on selected items', 50.00, '2024-10-01 00:00:00', '2024-10-31 23:59:59'),
 ('Summer Discount', 'Discount on summer collections', 30.00, '2024-07-01 00:00:00', '2024-07-31 23:59:59'),
@@ -142,7 +143,7 @@ VALUES
 (5, 5, true);  -- Địa chỉ thứ năm
 
 -- Bảng review (Phụ thuộc vào product và site_user)
-INSERT INTO user_review (product_id, user_id, comment, rating_value)
+INSERT INTO user_review (order_product_id, user_id, comment, rating_value)
 VALUES
 (1, 1, 'Great product!', 5),
 (2, 2, 'Very good quality!', 4),
