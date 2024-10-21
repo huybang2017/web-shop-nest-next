@@ -8,7 +8,6 @@ async function bootstrap() {
     .setTitle('Web shop api')
     .setDescription('The web api was built by nest')
     .setVersion('1.0')
-    .addTag('apis')
     .addBearerAuth()
     .build();
 
@@ -16,6 +15,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document, {
     customSiteTitle: 'Web shop api',
   });
-  await app.listen(3000);
+  await app.listen(8000);
 }
 bootstrap();
