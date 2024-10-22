@@ -1,16 +1,16 @@
 import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
-import { SignInDto } from 'src/dtos';
-import { AuthService } from 'src/services/auth.service';
+import { SignInDto } from './dto/sign-in.dto';
+import { AuthService } from './auth.service';
 
-@ApiTags('Auth') // Tag for grouping in Swagger UI
+@ApiTags('Auth')
 @Controller('auth/api')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  @ApiOperation({ summary: 'User login' }) // Brief description of the operation
+  @ApiOperation({ summary: 'User login' })
   @ApiBody({
     description: 'User login credentials',
     schema: {

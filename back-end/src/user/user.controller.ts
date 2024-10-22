@@ -17,13 +17,14 @@ import {
   ApiParam,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { User } from 'src/entities';
-import { CreateUserDto, UpdateUserDto } from 'src/dtos';
 import { AuthGuard } from 'src/utlis/guard/auth.guard';
 import { RolesGuard } from 'src/utlis/guard/role.guard';
 import { Roles } from 'src/utlis/decorate/role.decoator';
-import { UserService } from 'src/services/user.service';
 import { RoleType } from 'src/utlis/type/role-type';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from 'src/entities/site-user.entity';
 
 @ApiTags('User')
 @UseGuards(AuthGuard, RolesGuard)

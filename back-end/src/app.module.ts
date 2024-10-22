@@ -9,11 +9,11 @@ import { ConflictExceptionFilter } from './utlis/exception-filter/conflict-excep
 import { UnauthorizedExceptionFilter } from './utlis/exception-filter/unauthorized-exception.filter';
 import { ForbiddenExceptionFilter } from './utlis/exception-filter/forbidden-exception.filter';
 import { NotFoundExceptionFilter } from './utlis/exception-filter/not-found-exception.filter';
-import { AuthModule } from './modules/auth.module';
-import { UserModule } from './modules/user.module';
-import { ProductModule } from './modules/product.module';
 import { TransformDataPipe } from './utlis/pipes/transfrom-data.pipe';
 import { LoggerMiddleware } from './utlis/middleware/logger.middleware';
+import { UserModule } from './user/user.module';
+import { ProductModule } from './product/product.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
