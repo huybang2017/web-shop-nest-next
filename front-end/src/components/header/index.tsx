@@ -20,6 +20,7 @@ import { SearchIcon } from '@/components/icon/SearchIcon.jsx'
 import { ThemeSwitcher } from '../theme'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { FaShoppingCart } from 'react-icons/fa'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,9 +42,10 @@ export default function Header() {
 
   // Define your navbar items
   const navItems = [
-    { label: 'Features', href: '/features' },
-    { label: 'Customers', href: '/customers' },
-    { label: 'Integrations', href: '/integrations' },
+    { label: 'Home', href: '/' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/about' },
+    { label: 'Sign up', href: '/sign-up' },
   ]
 
   const getLinkClass = (path) =>
@@ -63,9 +65,11 @@ export default function Header() {
       </NavbarContent>
       <NavbarContent justify="start">
         <NavbarBrand className="mr-4">
-          <p className="hidden sm:block font-bold text-inherit">WEB-SHOP</p>
+          <p className="hidden sm:block font-bold text-inherit text-3xl">
+            Exclusive
+          </p>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-3">
+        <NavbarContent className="hidden sm:flex gap-8">
           {navItems.map((item) => (
             <NavbarItem key={item.href}>
               <Link href={item.href} className={getLinkClass(item.href)}>
@@ -91,6 +95,9 @@ export default function Header() {
           type="search"
         />
         <ThemeSwitcher />
+        <Link>
+          <FaShoppingCart className="cursor-pointer text-black text-xl" />
+        </Link>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
