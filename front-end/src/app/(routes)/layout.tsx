@@ -8,8 +8,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="container mx-auto">
         <Header />
         {children}
-        <Footer />
       </main>
+      <Footer />
     </>
   )
 }
