@@ -13,17 +13,19 @@ export class ProductService {
   ) {}
 
   // Get all products
+
   async findAll(): Promise<Product[]> {
-    return this.productRepository.find({
-      relations: ['category'],
+    const products = await this.productRepository.find({
+      relations: ['category', 'productItems'],
     });
+    return products;
   }
 
   // Get a single product by ID
   async findOne(id: number): Promise<Product> {
     const product = await this.productRepository.findOne({
       where: { id },
-      relations: ['category'],
+      relations: ['category', 'productItems'],
     });
 
     if (!product) {
