@@ -29,7 +29,7 @@ import { User } from 'src/entities/site-user.entity';
 @ApiTags('User')
 @UseGuards(AuthGuard, RolesGuard)
 @ApiBearerAuth()
-@Controller('user/api')
+@Controller('api/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

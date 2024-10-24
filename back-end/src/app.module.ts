@@ -14,6 +14,8 @@ import { LoggerMiddleware } from './utlis/middleware/logger.middleware';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
+import { PromotionModule } from './promotion/promotion.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     UserModule,
     ProductModule,
+    PromotionModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [
