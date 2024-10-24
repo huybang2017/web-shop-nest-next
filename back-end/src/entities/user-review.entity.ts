@@ -17,7 +17,7 @@ export class UserReview {
 
   @ApiProperty()
   @Column({ type: 'int' })
-  rating: number;
+  rating_value: number;
 
   @ApiProperty()
   @Column({ type: 'text' })

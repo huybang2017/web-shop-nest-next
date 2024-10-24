@@ -15,10 +15,12 @@ export class ShoppingCartItem {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @ManyToOne(() => ShoppingCart, (cart) => cart.cartItems)
   @JoinColumn({ name: 'cart_id' })
   cart: ShoppingCart;
 
+  @ApiProperty()
   @ManyToOne(() => ProductItem, (productItem) => productItem.shoppingCartItems)
   @JoinColumn({ name: 'product_item_id' })
   productItem: ProductItem;

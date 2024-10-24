@@ -45,6 +45,7 @@ export class Address {
   @Column({ type: 'varchar', length: 100 })
   postal_code: string;
 
+  @ApiProperty()
   @ManyToOne(() => Country, (country) => country.addresses)
   @JoinColumn({ name: 'country_id' })
   country: Country;

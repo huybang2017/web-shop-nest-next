@@ -22,19 +22,28 @@ export class ProductCategory {
   @Column({ type: 'varchar', length: 100 })
   category_name: string;
 
-  @ManyToOne(() => ProductCategory, (parentCategory) => parentCategory.id)
+  @ApiProperty({ required: false }) // Indicating that this field is optional
+  @ManyToOne(
+    () => ProductCategory,
+    (parentCategory) => parentCategory.children,
+    { nullable: true },
+  )
   @JoinColumn({ name: 'parent_category_id' })
-  parent_category_id: ProductCategory;
+  parent_category_id?: ProductCategory; // Make this property optional
 
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
 
   @OneToMany(() => Variation, (variation) => variation.category)
-  category: Variation[];
+  variations: Variation[];
 
   @OneToMany(
     () => PromotionCategory,
     (promotionCategory) => promotionCategory.productCategory,
   )
   promotionCategories: PromotionCategory[];
+
+  // This is to establish the reverse relation for children categories
+  @OneToMany(() => ProductCategory, (category) => category.parent_category_id)
+  children: ProductCategory[];
 }

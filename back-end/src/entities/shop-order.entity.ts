@@ -28,7 +28,7 @@ export class ShopOrder {
   orderLines: OrderLine[];
 
   @ApiProperty()
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   order_total: number;
 
   @ApiProperty()

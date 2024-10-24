@@ -17,12 +17,14 @@ export class OrderLine {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @ManyToOne(() => ShopOrder, (shopOrder) => shopOrder.orderLines, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'order_id' })
   order: ShopOrder;
 
+  @ApiProperty()
   @ManyToOne(() => ProductItem, (productItem) => productItem.orderLines, {
     onDelete: 'CASCADE',
   })
