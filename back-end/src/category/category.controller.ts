@@ -6,12 +6,14 @@ import {
   Delete,
   Param,
   Body,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
 import { CreateProductCategoryDto } from './dto/create-catefory.dto';
 import { UpdateProductCategoryDto } from './dto/update-category.dto';
 import { ProductCategory } from 'src/entities/product-category.entity';
+import { FilterDto, PaginationDto, SortDto } from './dto/category-params.dto';
 
 @ApiTags('Category')
 @Controller('api/category')
@@ -19,14 +21,13 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get all product categories' })
-  @ApiResponse({
-    status: 200,
-    description: 'List of product categories',
-    type: [ProductCategory],
-  })
-  async findAll(): Promise<ProductCategory[]> {
-    return this.categoryService.findAll();
+  @ApiOperation({ summary: 'Get a product category' })
+  async findAll(
+    @Query() filterDto: FilterDto,
+    @Query() sortDto: SortDto,
+    @Query() paginationDto: PaginationDto,
+  ): Promise<ProductCategory[]> {
+    return this.categoryService.findAll(filterDto, sortDto, paginationDto);
   }
 
   @Get(':id')
