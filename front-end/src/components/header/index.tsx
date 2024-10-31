@@ -4,7 +4,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   Input,
   Dropdown,
   DropdownTrigger,
@@ -17,13 +16,16 @@ import {
 } from '@nextui-org/react'
 
 import { SearchIcon } from '@/components/icon/SearchIcon.jsx'
-import { ThemeSwitcher } from '../theme'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaShoppingCart } from 'react-icons/fa'
+import Link from 'next/link'
+import { useUser } from '@/hook/useDecodeToken'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { user } = useUser()
+  console.log(user)
 
   const menuItems = [
     'Profile',
@@ -94,8 +96,7 @@ export default function Header() {
           startContent={<SearchIcon size={18} />}
           type="search"
         />
-        <ThemeSwitcher />
-        <Link>
+        <Link href="/cart">
           <FaShoppingCart className="cursor-pointer text-black text-xl" />
         </Link>
         <Dropdown placement="bottom-end">
@@ -104,7 +105,7 @@ export default function Header() {
               isBordered
               as="button"
               className="transition-transform"
-              color="success"
+              color="danger"
               name="Jason Hughes"
               size="sm"
               src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
