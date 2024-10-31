@@ -12,12 +12,23 @@ export class BadRequestExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const status = exception.getStatus();
 
-    response.status(status).json({
+    const errorResponse = {
+      message: [],
+      error: 'Bad Request',
       statusCode: status,
-      message: 'Bad request',
-      errors: exception.getResponse(),
-      timestamp: new Date().toISOString(),
-      path: ctx.getRequest().url,
-    });
+    };
+
+    const responseBody = exception.getResponse();
+    // Kiểm tra xem phản hồi có phải là đối tượng không
+    if (typeof responseBody === 'object' && responseBody) {
+      // Nếu có thông báo lỗi, thêm vào mảng message
+      if (Array.isArray(responseBody['message'])) {
+        errorResponse.message = responseBody['message'];
+      } else if (typeof responseBody['message'] === 'string') {
+        errorResponse.message.push(responseBody['message']);
+      }
+    }
+
+    response.status(status).json(errorResponse);
   }
 }

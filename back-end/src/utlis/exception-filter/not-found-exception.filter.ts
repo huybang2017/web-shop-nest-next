@@ -12,11 +12,22 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const status = exception.getStatus();
 
-    response.status(status).json({
+    const errorResponse = {
+      message: [],
+      error: 'Not Found',
       statusCode: status,
-      message: 'Resource not found',
-      timestamp: new Date().toISOString(),
-      path: ctx.getRequest().url,
-    });
+    };
+
+    const responseBody = exception.getResponse();
+
+    if (typeof responseBody === 'object' && responseBody) {
+      if (Array.isArray(responseBody['message'])) {
+        errorResponse.message = responseBody['message'];
+      } else if (typeof responseBody['message'] === 'string') {
+        errorResponse.message.push(responseBody['message']);
+      }
+    }
+
+    response.status(status).json(errorResponse);
   }
 }

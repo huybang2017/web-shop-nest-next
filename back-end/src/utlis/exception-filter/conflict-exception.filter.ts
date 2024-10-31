@@ -12,12 +12,23 @@ export class ConflictExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const status = exception.getStatus();
 
-    response.status(status).json({
+    const errorResponse = {
+      message: [],
+      error: 'Conflict',
       statusCode: status,
-      message: 'Conflict occurred',
-      errors: exception.getResponse(),
-      timestamp: new Date().toISOString(),
-      path: ctx.getRequest().url,
-    });
+    };
+
+    const responseBody = exception.getResponse();
+
+    if (typeof responseBody === 'object' && responseBody) {
+      if (Array.isArray(responseBody['message'])) {
+        errorResponse.message = responseBody['message'];
+      } else if (typeof responseBody['message'] === 'string') {
+        errorResponse.message.push(responseBody['message']);
+      }
+    }
+
+    // Gửi phản hồi với cấu trúc đã chỉnh sửa
+    response.status(status).json(errorResponse);
   }
 }
