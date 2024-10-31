@@ -25,12 +25,14 @@ export default function Banner() {
             </div>
           </div>
         </div>
-        <div className="w-[300px] h-[300px]">
-          <img
-            className="w-full h-full object-center"
-            src="/images/banner.png"
-            alt="banners"
-          />
+        <div className="flex justify-center">
+          <div className="w-[300px] h-[300px]">
+            <img
+              className="w-full h-full object-center"
+              src="/images/banner.png"
+              alt="banners"
+            />
+          </div>
         </div>
       </div>
     </div>
