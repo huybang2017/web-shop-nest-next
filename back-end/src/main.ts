@@ -5,8 +5,14 @@ import { SuccessResponseFilter } from './utlis/exception-filter/success-response
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
-    .setTitle('Web shop api')
+    .setTitle('Ecommerce web api')
     .setDescription('The web api was built by nest')
     .setVersion('1.0')
     .addBearerAuth()
