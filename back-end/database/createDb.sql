@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS web_shop;
-CREATE DATABASE IF NOT EXISTS web_shop;
-USE web_shop;
+DROP DATABASE IF EXISTS ecommerce;
+CREATE DATABASE IF NOT EXISTS ecommerce;
+USE ecommerce;
 
 -- Bảng promotion
 CREATE TABLE IF NOT EXISTS promotion (
@@ -12,10 +12,12 @@ CREATE TABLE IF NOT EXISTS promotion (
   end_date TIMESTAMP NOT NULL
 );
 
--- Bảng category (thiếu trong câu lệnh ban đầu)
-CREATE TABLE IF NOT EXISTS category (
+-- Bảng product_category
+CREATE TABLE IF NOT EXISTS product_category (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL
+  parent_category_id INT NOT NULL,
+  category_name VARCHAR(100) NOT NULL,
+  FOREIGN KEY (parent_category_id) REFERENCES product_category(id)
 );
 
 -- Bảng promotion_category
@@ -23,7 +25,7 @@ CREATE TABLE IF NOT EXISTS promotion_category (
   promotion_id INT NOT NULL,
   category_id INT NOT NULL,
   FOREIGN KEY (promotion_id) REFERENCES promotion(id),
-  FOREIGN KEY (category_id) REFERENCES category(id),
+  FOREIGN KEY (category_id) REFERENCES product_category(id),
   primary key (promotion_id, category_id)
 );
 
@@ -34,16 +36,7 @@ CREATE TABLE IF NOT EXISTS product (
   description TEXT NOT NULL,
   product_image VARCHAR(255) NOT NULL,
   category_id INT NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES category(id)
-);
-
--- Bảng product_category
-CREATE TABLE IF NOT EXISTS product_category (
-  product_id INT NOT NULL,
-  parent_category_id INT NOT NULL,
-  category_name VARCHAR(100) NOT NULL,
-  FOREIGN KEY (product_id) REFERENCES product(id),
-  FOREIGN KEY (parent_category_id) REFERENCES category(id)
+  FOREIGN KEY (category_id) REFERENCES product_category(id)
 );
 
 -- Bảng product_item
@@ -62,7 +55,7 @@ CREATE TABLE IF NOT EXISTS variation (
   id INT AUTO_INCREMENT PRIMARY KEY,
   category_id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES category(id)
+  FOREIGN KEY (category_id) REFERENCES product_category(id)
 );
 
 -- Bảng variation_option
@@ -131,6 +124,7 @@ CREATE TABLE IF NOT EXISTS shopping_cart_item (
   id INT AUTO_INCREMENT PRIMARY KEY,
   cart_id INT NOT NULL,
   product_item_id INT NOT NULL,
+  qty INT NOT NULL,
   FOREIGN KEY (cart_id) REFERENCES shopping_cart(id),
   FOREIGN KEY (product_item_id) REFERENCES product_item(id)
 );

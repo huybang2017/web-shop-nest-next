@@ -1,11 +1,15 @@
-use web_shop;
--- Bảng country (Không có phụ thuộc)
-INSERT INTO country (country_name)
-VALUES
-('United States'), ('Canada'), ('United Kingdom'), ('France'), ('Germany');
+use ecommerce;
 
--- Bảng category (Không có phụ thuộc)
-INSERT INTO category (id, name)
+-- Bảng country (Không có phụ thuộc)
+INSERT INTO country (country_name) VALUES
+('United States'),
+('Canada'),
+('Germany'),
+('France'),
+('Japan');
+
+-- Bảng product_category (Phụ thuộc vào product và category)
+INSERT INTO product_category (parent_category_id, category_name)
 VALUES
 (1, 'Clothing'), (2, 'Shoes'), (3, 'Accessories'), (4, 'Electronics'), (5, 'Home Appliances');
 
@@ -28,7 +32,6 @@ VALUES
 ('user3@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '555555555'),
 ('user4@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '111222333'),
 ('user5@example.com', '$2a$10$JgMxpb923KdZlzJp1b5Jq./N5Ktwp5rpCpLWG9Aj2z2Izu.j1IA.m', 'user', '999888777');
-
 
 -- Bảng shipping_method (Không có phụ thuộc)
 INSERT INTO shipping_method (name, price)
@@ -91,20 +94,15 @@ INSERT INTO promotion_category (promotion_id, category_id)
 VALUES
 (1, 1), (2, 2), (3, 3), (4, 4), (5, 5);
 
--- Bảng product_category (Phụ thuộc vào product và category)
-INSERT INTO product_category (product_id, parent_category_id, category_name)
-VALUES
-(1, 1, 'Clothing'), (2, 2, 'Shoes'), (3, 3, 'Accessories'), (4, 4, 'Electronics'), (5, 5, 'Home Appliances');
-
 -- Bảng shopping_cart (Phụ thuộc vào site_user)
 INSERT INTO shopping_cart (user_id)
 VALUES
 (1), (2), (3), (4), (5);
 
 -- Bảng shopping_cart_item (Phụ thuộc vào shopping_cart và product_item)
-INSERT INTO shopping_cart_item (cart_id, product_item_id)
+INSERT INTO shopping_cart_item (cart_id, product_item_id, qty)
 VALUES
-(1, 1), (1, 2), (2, 3), (2, 4), (3, 5);
+(1, 1, 2), (1, 2, 1), (2, 3, 3), (2, 4, 2), (3, 5, 4);
 
 -- Bảng user_payment_method (Phụ thuộc vào site_user và payment_type)
 INSERT INTO user_payment_method (user_id, payment_type_id, provider, account_number, expiry_date, is_default)
