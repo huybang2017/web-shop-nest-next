@@ -16,6 +16,7 @@ import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { PromotionModule } from './promotion/promotion.module';
 import { CategoryModule } from './category/category.module';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CategoryModule } from './category/category.module';
     ProductModule,
     PromotionModule,
     CategoryModule,
+    ShoppingCartModule,
   ],
   controllers: [AppController],
   providers: [
@@ -51,6 +53,6 @@ import { CategoryModule } from './category/category.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*'); // Áp dụng cho tất cả các route
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
